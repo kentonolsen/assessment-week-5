@@ -23,10 +23,10 @@ module.exports = {
     },
     getCities: (req, res) => {
         sequelize.query(`
-        select cities.city_id, cities.name, rating, countries.name, countries.country_id
-        from cities
-            join countries
-            on cities.city_id = countries.country_id;`)
+        select ci.city_id, ci.name as city, rating, co.name as country, co.country_id
+        from cities as ci
+            join countries as co
+            on ci.city_id = co.country_id;`)
             .then(dbRes => res.status(200).send(dbRes[0]))
     },
     deleteCity: (req, res) => {
